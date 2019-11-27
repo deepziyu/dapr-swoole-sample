@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-app
+  labels:
+    app: php-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-app
+  template:
+    metadata:
+      labels:
+        app: php-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "php-app"
+    spec:
+      containers:
+        - name: php-app
+          image: <YOUR REGISTRY>
+          env:
+            - name: DAPR_HTTP_PORT
+              value: "3500"
+            - name: INVOKE_ID
+              value: swoole-app
+      imagePullSecrets:
+        - name: <YOUR REGISTRY LOGIN Secrets>

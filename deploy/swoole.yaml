@@ -1,0 +1,48 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: swoole-app
+  labels:
+    app: swoole-app
+spec:
+  selector:
+    app: swoole-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swoole-app
+  labels:
+    app: swoole-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swoole-app
+  template:
+    metadata:
+      labels:
+        app: swoole-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "swoole-app"
+        dapr.io/port: "3000"
+    spec:
+      containers:
+        - name: swoole-app
+          image: <YOUR REGISTRY>
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          env:
+            - name: DAPR_HTTP_PORT
+              value: "3500"
+            - name: SERVER_HTTP_PORT
+              value: "3000"
+      imagePullSecrets:
+        - name: <YOUR REGISTRY LOGIN Secrets>

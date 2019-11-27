@@ -1,0 +1,12 @@
+{
+    "name": "lizhe/dapr-swoole-sample",
+    "authors": [
+        {
+            "name": "deepziyu",
+            "email": "lizhenju@inboyu.com"
+        }
+    ],
+    "require": {
+        "swoft/swoole-ide-helper": "dev-master"
+    }
+}

@@ -13,7 +13,7 @@
 
 填上你的 docker-registry 地址：
 - makefile 文件的的 SAMPLE_REGISTRY 变量
-- deploy/*.yaml 文件的 <YOUR REGISTRY> && <YOUR REGISTRY LOGIN SECRETS>
+- deploy/*.yaml 文件的 YOUR REGISTRY && YOUR REGISTRY LOGIN SECRETS
 
 #### 2、构建 docker image 
 
